@@ -76,7 +76,7 @@ def DataCollect():
 
 def DataInsertSheet(lst):
     SCOPES = ['https://www.googleapis.com/auth/spreadsheets']
-    SERVICE_ACCOUNT_FILE = r"=keys.json"
+    SERVICE_ACCOUNT_FILE = r"" # your downloaded keys.json
     creds = None
     creds = service_account.Credentials.from_service_account_file(
         SERVICE_ACCOUNT_FILE, scopes = SCOPES)
@@ -85,7 +85,7 @@ def DataInsertSheet(lst):
     service = build('sheets', 'v4', credentials=creds)
     sheet = service.spreadsheets()
     # Updating values from the spreadsheets
-    request = sheet.values().clear(spreadsheetId = SAMPLE_SPREADSHEET_ID, range = "Foaie1!A:Z").execute()
+    request = sheet.values().clear(spreadsheetId = SAMPLE_SPREADSHEET_ID, range = "Foaie1!A:Z").execute() # Enter sheetname + ! + columns
     print(request)
     request = sheet.values().update(spreadsheetId = SAMPLE_SPREADSHEET_ID, range = "Foaie1!A:Z", valueInputOption = "USER_ENTERED", body = {"values": lst}).execute()
 
